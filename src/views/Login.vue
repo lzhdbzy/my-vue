@@ -4,14 +4,15 @@
       <h1>智学无忧后台</h1>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="手机号" prop="user">
-          <el-input type="text" v-model="ruleForm.phone" autocomplete="off" οninput="if(value.length>11)value=value.slice(0,11)"></el-input>
+          <el-input type="text" v-model="ruleForm.phone" autocomplete="off"
+            οninput="if(value.length>11)value=value.slice(0,11)"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="pass">
           <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
           <el-checkbox v-model="checked">记住密码</el-checkbox>
         </el-form-item>
       </el-form>
-      <el-button class="but" type="primary" round @click="loginn(ruleForm)" v-model="ruleForm" :disabled="isDisable">登录
+      <el-button class="but" type="primary" round @click="loginn(ruleForm)" v-model="ruleForm" :loading="isDisable">登录
       </el-button>
     </div>
   </div>
@@ -25,11 +26,11 @@
   export default {
     data() {
       return {
-        isDisable: false,
-        checked: false,
+        isDisable: false,     //登录
+        checked: false,       //记住密码
         ruleForm: {
-          phone: '',
-          pass: ''
+          phone: '',      //手机号
+          pass: ''      //密码
         },
         rules: {
           phone: [{
@@ -47,36 +48,37 @@
     },
     //方法
     methods: {
+      // 登录
       loginn() {
-        this.isDisable = true
-       
-        this.axios({
+        let that =this
+        that.isDisable = true     
+        that.axios({
           url: "/api/OAuth/authenticate?userMobile=" + this.ruleForm.phone + "&userPassword=" + this.ruleForm.pass,
         }).then((res) => {
-          this.$message({
+          that.$message({
             message: '登录成功',
             type: 'success'
           })
-          this.$router.push("/Home")
+          that.$router.push("/Home")
         }).catch((res) => {
-          this.$message({
+          that.$message({
             message: "账号或者密码错误",
             type: "error"
           })
         })
         // 判断复选框是否被勾选; 勾选则调用配置Cookie方法
-        if (this.checked) { // 记住密码
-          this.setCookie(this.ruleForm.phone, this.ruleForm.pass, 30); // 保存期限为30天
-          let phone = Base64.encode(this.ruleForm.phone)
-          let pass = Base64.encode(this.ruleForm.pass)
-          this.setCookie(phone, pass, 11)
+        if (that.checked) { // 记住密码
+          that.setCookie(that.ruleForm.phone, that.ruleForm.pass, 30); // 保存期限为30天
+          let phone = Base64.encode(that.ruleForm.phone)
+          let pass = Base64.encode(that.ruleForm.pass)
+          that.setCookie(phone, pass, 11)
         } else {
-          this.clearCookie(); // 清空 Cookie
+          that.clearCookie(); // 清空 Cookie
 
         }
         setTimeout(() => { //时间函数
-          this.isDisable = false
-        }, 2000)
+          that.isDisable = false
+        }, 3000)
       },
 
 
@@ -102,8 +104,8 @@
             let arr2 = arr[i].split('='); // 再次切割
             // 判断查找相对应的值 
             if (arr2[0] == 'phone') {
-              this.ruleForm.phone = Base64.decode(arr2[1]).substring(0,11); // 保存到保存数据的地方   
-              
+              this.ruleForm.phone = Base64.decode(arr2[1]).substring(0, 11); // 保存到保存数据的地方   
+
             } else if (arr2[0] == 'pass') {
               this.ruleForm.pass = Base64.decode(arr2[1]);
             }

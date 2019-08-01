@@ -6,10 +6,10 @@ import Management from './views/buil/Management.vue'
 import student from './views/buil/student.vue'
 import Teacher from './views/buil/Teacher.vue'
 import Home from './views/buil/Home.vue'
-import Testpaper from './views/buil/Testpaper.vue'
-import Placement from './views/buil/Placement.vue'
-import Markingexam from './views/buil/Markingexam.vue'
-import examination from './views/buil/examination.vue'
+import Testpaper from './views/Teacherr/Testpaper.vue'
+import Placement from './views/Teacherr/Placement.vue'
+import Markingexam from './views/Teacherr/Markingexam.vue'
+import examination from './views/Teacherr/examination.vue'
 
 Vue.use(Router)
 
