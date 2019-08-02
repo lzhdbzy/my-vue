@@ -24,6 +24,7 @@
   import Cookie from "@/unti/Cookie"
   import Base64 from "@/unti/Base64"
   export default {
+    //数据
     data() {
       return {
         isDisable: false,     //登录
@@ -59,7 +60,13 @@
             message: '登录成功',
             type: 'success'
           })
+          console.log(res.data)
           that.$router.push("/Home")
+              // token 请求头
+          that.$store.state.uid=res.data.profile.userUid
+          that.$store.state.token=res.data.access_token
+          that.$store.state.tokenType=res.data.token_type
+          console.log(that.$store.state.uid) 
         }).catch((res) => {
           that.$message({
             message: "账号或者密码错误",
@@ -88,6 +95,7 @@
         var main = document.getElementsByClassName("picmain")
         main[0].style.cssText = "height:" + h + "px;"
       },
+      //保存天数Cookie
       setCookie(phone, pass, exdays) { // 用户名, 密码, 保存天数
         let exdate = new Date(); // 获取时间
         exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
@@ -118,7 +126,7 @@
         this.setCookie('', '', -1); // 修改2值都为空，天数为负1天就好了
       }
     },
-    mounted() {
+    mounted() {     //挂载后
       this.windowwid();
       this.getCookie();
     }

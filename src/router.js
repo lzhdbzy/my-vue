@@ -10,6 +10,7 @@ import Testpaper from './views/Teacherr/Testpaper.vue'
 import Placement from './views/Teacherr/Placement.vue'
 import Markingexam from './views/Teacherr/Markingexam.vue'
 import examination from './views/Teacherr/examination.vue'
+import Achievements from './views/Teacherr/Achievements.vue'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ export default new Router({
           name: 'examination',
           component: examination
         },
+        {
+          path: 'Achievements',        //试卷维护
+          name: 'Achievements',
+          component: Achievements
+        }
       ]
     }
   ]
