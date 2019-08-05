@@ -27,11 +27,11 @@
     //数据
     data() {
       return {
-        isDisable: false,     //登录
-        checked: false,       //记住密码
+        isDisable: false, //登录
+        checked: false, //记住密码
         ruleForm: {
-          phone: '',      //手机号
-          pass: ''      //密码
+          phone: '', //手机号
+          pass: '' //密码
         },
         rules: {
           phone: [{
@@ -51,8 +51,8 @@
     methods: {
       // 登录
       loginn() {
-        let that =this
-        that.isDisable = true     
+        let that = this
+        that.isDisable = true
         that.axios({
           url: "/api/OAuth/authenticate?userMobile=" + this.ruleForm.phone + "&userPassword=" + this.ruleForm.pass,
         }).then((res) => {
@@ -62,11 +62,11 @@
           })
           console.log(res.data)
           that.$router.push("/Home")
-              // token 请求头
-          that.$store.state.uid=res.data.profile.userUid
-          that.$store.state.token=res.data.access_token
-          that.$store.state.tokenType=res.data.token_type
-          console.log(that.$store.state.uid) 
+          // token 请求头
+          sessionStorage.setItem("userName", res.data.profile.userName);      //管理员
+          sessionStorage.setItem("uid", res.data.profile.userUid);    //令牌
+          sessionStorage.setItem("token_type","Bearer" + " " + res.data.access_token);
+          console.log(res.data.profile.userUid)
         }).catch((res) => {
           that.$message({
             message: "账号或者密码错误",
@@ -126,7 +126,11 @@
         this.setCookie('', '', -1); // 修改2值都为空，天数为负1天就好了
       }
     },
-    mounted() {     //挂载后
+    created() {
+      sessionStorage.setItem("istrue",false);
+      console.log(sessionStorage.getItem("istrue"));
+    },
+    mounted() { //挂载后
       this.windowwid();
       this.getCookie();
     }

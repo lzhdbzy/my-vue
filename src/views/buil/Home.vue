@@ -16,35 +16,35 @@
               <el-menu-item>
                 <router-link to="/Home/Testpaper">
                   <el-menu-item index="1-1" class="menus" @click="addTab(editableTabsValue2,0,'/Home/Testpaper')"
-                    style="padding-left: 10px;font-size: 19px;">添加试卷
+                    style="padding-left:0px;font-size: 19px;">添加试卷
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
               <el-menu-item>
                 <router-link to="/Home/Placement">
                   <el-menu-item index="1-2" class="menus" @click="addTab(editableTabsValue2,1,'/Home/Placement')"
-                    style="padding-left: 10px;font-size: 19px;">布置考试
+                    style="padding-left:0px;font-size: 19px;">布置考试
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
               <el-menu-item>
                 <router-link to="/Home/Markingexam">
                   <el-menu-item index="1-3" class="menus" @click="addTab(editableTabsValue2,2,'/Home/Markingexam')"
-                    style="padding-left: 10px;font-size: 19px;">批阅试卷
+                    style="padding-left:0px;font-size: 19px;">批阅试卷
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
               <el-menu-item>
                 <router-link to="/Home/examination">
                   <el-menu-item index="1-4" class="menus" @click="addTab(editableTabsValue2,3,'/Home/examination')"
-                    style="padding-left: 10px;font-size: 19px;">试卷维护
+                    style="padding-left:0px;font-size: 19px;">试卷维护
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
               <el-menu-item>
                 <router-link to="/Home/Achievements">
                   <el-menu-item index="1-5" class="menus" @click="addTab(editableTabsValue2,4,'/Home/Achievements')"
-                    style="padding-left: 10px;font-size: 19px;">查看成绩
+                    style="padding-left:0px;font-size: 19px;">查看成绩
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
@@ -58,29 +58,29 @@
             <el-menu-item-group style="background-color:white;padding: 0px !important">
               <el-menu-item>
                 <router-link to="/Home/Change">
-                  <el-menu-item index="2-1" class="menus" @click="addTab(editableTabsValue2,5,'/Home/Change')"
-                    style="padding-left: 10px;font-size: 19px;">修改密码
+                  <el-menu-item index="1-6" class="menus" @click="addTab(editableTabsValue2,5,'/Home/Change')"
+                    style="padding-left:0px;font-size: 19px;">修改密码
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
               <el-menu-item>
                 <router-link to="/Home/Management">
-                  <el-menu-item index="2-2" class="menus" @click="addTab(editableTabsValue2,6,'/Home/Management')"
-                    style="padding-left: 10px;font-size: 19px;">班级管理
+                  <el-menu-item index="1-7" class="menus" @click="addTab(editableTabsValue2,6,'/Home/Management')"
+                    style="padding-left: 0px;font-size: 19px;">班级管理
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
               <el-menu-item>
                 <router-link to="/Home/student">
-                  <el-menu-item index="2-3" class="menus" @click="addTab(editableTabsValue2,7,'/Home/student')"
-                    style="padding-left: 10px;font-size: 19px;">学生管理
+                  <el-menu-item index="1-8" class="menus" @click="addTab(editableTabsValue2,7,'/Home/student')"
+                    style="padding-left: 0px;font-size: 19px;">学生管理
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
               <el-menu-item>
                 <router-link to="/Home/Teacher">
-                  <el-menu-item index="2-4" class="menus" @click="addTab(editableTabsValue2,8,'/Home/Teacher')"
-                    style="padding-left: 10px;font-size: 19px;">老师管理
+                  <el-menu-item index="1-9" class="menus" @click="addTab(editableTabsValue2,8,'/Home/Teacher')"
+                    style="padding-left: 0px;font-size: 19px;">老师管理
                   </el-menu-item>
                 </router-link>
               </el-menu-item>
@@ -100,13 +100,20 @@
           <div class="stop">
             <span @click="stop">退出系统</span>
           </div>
+
+          <div class="titlethere">
+            <div class="titsb">
+              <el-tabs v-model="editableTabsValue2" type="card" @tab-remove="removeTab" @tab-click="Hop">
+                <el-tab-pane v-for="(item, index) in editableTabs2" :key="index" :label="item.title" :name="item.name"
+                  :closable="item.closable">
+                </el-tab-pane>
+              </el-tabs>
+            </div>
+          </div>
         </el-header>
         <!-- 中间栏 -->
         <el-main>
-          <el-tabs v-model="editableTabsValue2" type="card" @tab-remove="removeTab" @tab-click="Hop">
-            <el-tab-pane v-for="(item, index) in editableTabs2" :key="index" :label="item.title" :name="item.name"
-              :closable="item.closable"></el-tab-pane>
-          </el-tabs>
+
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -124,18 +131,18 @@
         activeIndex: '1',
         activeIndex2: '1',
         isCollapse: false, //控制伸缩图片的
-        editableTabsValue2: '1', //标签页
+        editableTabsValue2: '0', //标签页
         editableTabs2: [{
           title: '首页',
           path: '/Home',
-          name: '1',
+          name: '0',
           closable: false
         }],
         tabIndex: 2,
         arr1: [
           "首页",
           "添加试卷",
-          "布置试卷",
+          "布置考试",
           "批阅试卷",
           "试卷维护",
           "查看成绩",
@@ -181,7 +188,7 @@
         var that = this;
         var rout = rout;
         console.log(rout)
-        var num = document.getElementsByClassName("menus") //获取传参属性的Class值      获取别个的下标位置
+        var num = document.getElementsByClassName("menus") //获取传参属性的Class值      获取下标位置
         var texts = num[index].innerText; //获取位置
         // console.log(num[7].innerText)     
         var bool = false;
@@ -216,21 +223,21 @@
       Hop(targetName) {
         var that = this;
         var arr = [
-          "/Home",
-          "/Home/Testpaper",
-          "/Home/Placement",
-          "/Home/Markingexam",
-          "/Home/examination",
-          "/Home/Achievements",
-          "/Home/Change",
-          "/Home/Managemen",
-          "/Home/student",
-          "/Home/Teacher"
+          "/Home",    //首页
+          "/Home/Testpaper", //添加试卷
+          "/Home/Placement", //布置考试
+          "/Home/Markingexam", //批阅试卷
+          "/Home/examination", //试卷维护
+          "/Home/Achievements", //查看成绩
+          "/Home/Change", //修改密码
+          "/Home/Management", //班级管理
+          "/Home/student", //学生管理
+          "/Home/Teacher" //老师管理
         ];
         var arr1 = [
           "首页",
           "添加试卷",
-          "布置试卷",
+          "布置考试",
           "批阅试卷",
           "试卷维护",
           "查看成绩",
@@ -262,7 +269,7 @@
                 than.$router.push({
                   path: nextTab.content
                 });
-              }
+              } 
             }
           });
         }
@@ -272,33 +279,29 @@
       // 点击
       tabadd(path) {
         var ev = ev || event
-        var index =this.findindex(ev.target.innerHtml)
-        if(index<0){
-          var conte=document.getElementsByClassName("el-main")
-          var content=document.getElementsByClassName("el-tabs__item")
-          var wid=0
-          for(var i=0;i<content.length;i++){
-              wid+=content[i].offsetWidth
+        var index = this.findindex(ev.target.innerHtml) //查找元素是否存在
+        if (index < 0) { //如果大于0
+          var conte = document.getElementsByClassName("el-header")
+          var content = document.getElementsByClassName("el-tabs__item")
+          var wid = 0
+          for (var i = 0; i < content.length; i++) {
+            wid += content[i].offsetWidth
           }
-          if(wid>conte[0].offsetWidth-200){   //根据长度不够可以在加
-              this.$message({
-                message:"标签不能在多了",
-                type:"warning"
-              })
+          if (wid > conte[0].offsetWidth - 200) { //根据长度不够可以在加
           }
         }
       },
-      findindex(name){    //查找元素是否已经存在
-          var index =0;
-          for(var i =0;i<this.editableTabs2.length;i++){
-              if(this.editableTabs2[i].title==name){
-                index=i;
-              break;
-              }else{
-                index=-1
-              }
+      findindex(name) { //查找元素是否已经存在
+        var index = 0;
+        for (var i = 0; i < this.editableTabs2.length; i++) {
+          if (this.editableTabs2[i].title == name) {
+            index = i;
+            break;
+          } else {
+            index = -1
           }
-          return index
+        }
+        return index
       }
     }
   }
@@ -311,8 +314,6 @@
   }
 
   .el-header {
-    background-color: rgba(3, 10, 20, 0.705);
-    color: #333;
     text-align: center;
     line-height: 60px;
     height: 70px;
@@ -324,7 +325,7 @@
     height: 1000px;
   }
 
-  .el-main {
+  .el-header {
     padding: 0px;
     height: 1000px;
     background-color: white;
@@ -358,7 +359,7 @@
     float: left;
     font-size: xx-large;
     /* 字体变大 */
-    color: white;
+    color: black !important;
     margin-top: auto;
     margin-bottom: auto;
   }
@@ -371,18 +372,17 @@
     width: 200px;
     font-family: 楷体;
     text-decoration: none;
-    color: black;
   }
 
   .iconn {
-    color: white;
+    color: black !important;
     margin-right: 130px;
     font-size: 27px;
     float: right;
   }
 
   .stop {
-    color: white;
+    color: black !important;
     margin-right: 30px;
     font-size: 23px;
     float: right;
@@ -402,4 +402,15 @@
     min-width: 200px;
   }
 
+  .titlethere {
+    color: white;
+    overflow: hidden;
+  }
+
+  .el-menu-item:focus,
+  .el-menu-item:active,
+  .el-menu-item:hover {
+    outline: 1;
+    background-color: #99c8f5;
+  }
 </style>
