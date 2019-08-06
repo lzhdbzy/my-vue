@@ -171,6 +171,7 @@
           type: 'success'
         })
         this.$router.push('/')
+        sessionStorage.clear()
       },
       // 图片伸缩
       trsfor() {
@@ -205,8 +206,8 @@
         if (bool) { //如果为true  获取到的位置都添加进去
           let newTabName = ++this.tabIndex + "";
           this.editableTabs2.push({
-            title: texts, //位置
-            name: newTabName, //名字
+            title: texts, //名字
+            name: newTabName, //位置
             content: rout, //路由
             closable: true //删除
           });
@@ -412,5 +413,8 @@
   .el-menu-item:hover {
     outline: 1;
     background-color: #99c8f5;
+  }
+  .el-tabs--card>.el-tabs__header{
+    border-right: 1px solid #E4E7ED !important;
   }
 </style>

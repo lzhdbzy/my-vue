@@ -60,13 +60,12 @@
             message: '登录成功',
             type: 'success'
           })
-          console.log(res.data)
           that.$router.push("/Home")
           // token 请求头
           sessionStorage.setItem("userName", res.data.profile.userName);      //管理员
-          sessionStorage.setItem("uid", res.data.profile.userUid);    //令牌
-          sessionStorage.setItem("token_type","Bearer" + " " + res.data.access_token);
-          console.log(res.data.profile.userUid)
+          sessionStorage.setItem("uid", res.data.profile.userUid);    //用户唯一标识符
+          sessionStorage.setItem("token_type","Bearer" + " " + res.data.access_token);    //密钥
+          console.log(res.data)
         }).catch((res) => {
           that.$message({
             message: "账号或者密码错误",
