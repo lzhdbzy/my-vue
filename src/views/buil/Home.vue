@@ -3,87 +3,34 @@
     <el-container>
       <!-- 左边栏 -->
       <el-aside width="auto">
-        <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse"
-          @select="tabadd" :default-active="$route.path" id="menu" style="height: 1200px;
+        <el-menu class="el-menu-vertical-demo" active-text-color="#ffd04b" :collapse="isCollapse" @select="tabadd"
+          :default-active="$route.path" style="height: 1200px;
          overflow: hidden;">
           <div class="pi"><img src="../../assets/logo-1.png"></div>
-          <el-submenu index="2">
+          <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-menu"></i>
               <span slot="title" style="font-family: 楷体;font-size: 17px;">在线测试</span>
             </template>
-            <el-menu-item-group style="background-color:white; ">
-              <el-menu-item>
-                <router-link to="/Home/Testpaper">
-                  <el-menu-item index="1-1" class="menus" @click="addTab(editableTabsValue2,0,'/Home/Testpaper')"
-                    style="padding-left:0px;font-size: 19px;">添加试卷
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
-              <el-menu-item>
-                <router-link to="/Home/Placement">
-                  <el-menu-item index="1-2" class="menus" @click="addTab(editableTabsValue2,1,'/Home/Placement')"
-                    style="padding-left:0px;font-size: 19px;">布置考试
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
-              <el-menu-item>
-                <router-link to="/Home/Markingexam">
-                  <el-menu-item index="1-3" class="menus" @click="addTab(editableTabsValue2,2,'/Home/Markingexam')"
-                    style="padding-left:0px;font-size: 19px;">批阅试卷
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
-              <el-menu-item>
-                <router-link to="/Home/examination">
-                  <el-menu-item index="1-4" class="menus" @click="addTab(editableTabsValue2,3,'/Home/examination')"
-                    style="padding-left:0px;font-size: 19px;">试卷维护
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
-              <el-menu-item>
-                <router-link to="/Home/Achievements">
-                  <el-menu-item index="1-5" class="menus" @click="addTab(editableTabsValue2,4,'/Home/Achievements')"
-                    style="padding-left:0px;font-size: 19px;">查看成绩
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
+            <el-menu-item-group>
+              <el-menu-item index="/Home/Testpaper">添加试卷 </el-menu-item>
+              <el-menu-item index="/Home/Placement">布置考试 </el-menu-item>
+              <el-menu-item index="/Home/Markingexam">批阅试卷 </el-menu-item>
+              <el-menu-item index="/Home/examination">试卷维护 </el-menu-item>
+              <el-menu-item index="/Home/Achievements">查看成绩 </el-menu-item>
             </el-menu-item-group>
+            <el-menu-item index="/Home" style="display:none">查看成绩 </el-menu-item>
           </el-submenu>
-          <el-submenu index="4">
+          <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-menu"></i>
               <span slot="title" style="font-family: 楷体;font-size: 17px">基础数据</span>
             </template>
-            <el-menu-item-group style="background-color:white;padding: 0px !important">
-              <el-menu-item>
-                <router-link to="/Home/Change">
-                  <el-menu-item index="1-6" class="menus" @click="addTab(editableTabsValue2,5,'/Home/Change')"
-                    style="padding-left:0px;font-size: 19px;">修改密码
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
-              <el-menu-item>
-                <router-link to="/Home/Management">
-                  <el-menu-item index="1-7" class="menus" @click="addTab(editableTabsValue2,6,'/Home/Management')"
-                    style="padding-left: 0px;font-size: 19px;">班级管理
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
-              <el-menu-item>
-                <router-link to="/Home/student">
-                  <el-menu-item index="1-8" class="menus" @click="addTab(editableTabsValue2,7,'/Home/student')"
-                    style="padding-left: 0px;font-size: 19px;">学生管理
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
-              <el-menu-item>
-                <router-link to="/Home/Teacher">
-                  <el-menu-item index="1-9" class="menus" @click="addTab(editableTabsValue2,8,'/Home/Teacher')"
-                    style="padding-left: 0px;font-size: 19px;">老师管理
-                  </el-menu-item>
-                </router-link>
-              </el-menu-item>
+            <el-menu-item-group>
+              <el-menu-item index="/Home/Change">修改密码</el-menu-item>
+              <el-menu-item index="/Home/Management">班级管理</el-menu-item>
+              <el-menu-item index="/Home/student">学生管理</el-menu-item>
+              <el-menu-item index="/Home/Teacher">老师管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -100,12 +47,11 @@
           <div class="stop">
             <span @click="stop">退出系统</span>
           </div>
-
           <div class="titlethere">
             <div class="titsb">
-              <el-tabs v-model="editableTabsValue2" type="card" @tab-remove="removeTab" @tab-click="Hop">
-                <el-tab-pane v-for="(item, index) in editableTabs2" :key="index" :label="item.title" :name="item.name"
-                  :closable="item.closable">
+              <el-tabs v-model="editableTabsValue2" type="card" @tab-remove="removeTab">
+                <el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title"
+                  :name="item.name" :closable="index==0?false:true">
                 </el-tab-pane>
               </el-tabs>
             </div>
@@ -113,7 +59,6 @@
         </el-header>
         <!-- 中间栏 -->
         <el-main>
-
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -122,47 +67,67 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-  // import HelloWorld from '@/components/HelloWorld.vue'
   export default {
     // 数据
     data() {
       return {
-        activeIndex: '1',
-        activeIndex2: '1',
         isCollapse: false, //控制伸缩图片的
         editableTabsValue2: '0', //标签页
-        editableTabs2: [{
-          title: '首页',
-          path: '/Home',
-          name: '0',
-          closable: false
-        }],
-        tabIndex: 2,
-        arr1: [
-          "首页",
-          "添加试卷",
-          "布置考试",
-          "批阅试卷",
-          "试卷维护",
-          "查看成绩",
-          "修改密码",
-          "班级管理",
-          "学生管理",
-          "老师管理"
-        ]
-      };
+        editableTabs: [{
+          title: "首页",
+          path: "/Home",
+          name: " 0"
+        }]
+      }
     },
     // 方法
     methods: {
-      handleOpen(key, keyPath) { //NavMenu 导航菜单自带的
-        console.log(key, keyPath);
+      //窗体的高度
+      windowwid() {
+        var h = window.innerHeight
+        var main = document.getElementById("main")
+        main.style.cssText = "height:" + h + "px;"
       },
-      handleClose(key, keyPath) { //NavMenu 导航菜单自带的
-        console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath) { //NavMenu 导航菜单自带的
-        console.log(key, keyPath);
+      // 点击
+      tabadd(path) {
+        var ev = ev || event
+        var index = this.findindex(ev.target.innerHTML) //查找元素是否已经存在
+        if (index < 0) { //大于0则添加进去
+          var contentmain = document.getElementsByClassName("el-header")
+          var content = document.getElementsByClassName("el-tabs__item")
+          var wid = 0
+          for (var i = 0; i < content.length; i++) {
+            wid += content[i].offsetWidth //offsetWidth实际宽度
+          }
+          if (wid > contentmain[0].offsetWidth - 200) { //判断长度不够可以再加
+            this.$message({
+              message: "标签不能再多了",
+              type: "warning"
+            })
+          } else { //Number数字
+            let newTabName = Number(this.editableTabs[this.editableTabs.length - 1].name) + 1 + ""
+            var a = {
+              title: ev.target.innerHTML, //名字
+              path: path, //路劲
+              name: newTabName //下标
+            }
+            this.editableTabsValue2 = newTabName;
+            this.editableTabs.push(a) //点击那个添加进去
+            console.log(this.editableTabs[1].title)
+            var str = "[" //循环数组里面的信息点击那个添加进去。保存到会话存储里面
+            for (var i = 0; i < this.editableTabs.length; i++) {
+              str += "{title:'" + this.editableTabs[i].title + "',path:'" + this.editableTabs[i].path + "',name:'" +
+                this.editableTabs[i].name + "'},"
+            }
+            str = str.substring(0, str.lastIndexOf(","))
+            str += "]"
+            sessionStorage.arr = str
+            sessionStorage.path = this.editableTabs[this.removeindex(this.editableTabsValue2)].path
+            sessionStorage.nvalue = this.editableTabsValue2
+          }
+        } else {
+          this.editableTabsValue2 = this.editableTabs[index].name //标签页的下标名字
+        }
       },
       // 退出登录
       stop() {
@@ -184,125 +149,84 @@
           iconer[0].classList.remove("trsfor") //否则在元素中删除类名
         }
       },
-      // 点击添加传参
-      addTab(targetName, index, rout) {
-        var that = this;
-        var rout = rout;
-        console.log(rout)
-        var num = document.getElementsByClassName("menus") //获取传参属性的Class值      获取下标位置
-        var texts = num[index].innerText; //获取位置
-        // console.log(num[7].innerText)     
-        var bool = false;
-        var ins = 0;
-        for (let i = 0; i < that.editableTabs2.length; i++) { //循环要遍历的值
-          if (that.editableTabs2[i].title == texts) { //遍历的值等于获取到位置的值
-            bool = false;
-            ins = i;
-            break; //结束
-          } else {
-            bool = true; //否则为true
-          }
-        }
-        if (bool) { //如果为true  获取到的位置都添加进去
-          let newTabName = ++this.tabIndex + "";
-          this.editableTabs2.push({
-            title: texts, //名字
-            name: newTabName, //位置
-            content: rout, //路由
-            closable: true //删除
-          });
-          that.editableTabsValue2 = newTabName;
-        } else {
-          var id = that.editableTabs2[ins].title;
-          var index = that.arr1.indexOf(id);
-          index = index + 2;
-          console.log(index)
-          that.editableTabsValue2 = index + "";
-        }
-      },
-      // 点击跳转路由
-      Hop(targetName) {
-        var that = this;
-        var arr = [
-          "/Home",    //首页
-          "/Home/Testpaper", //添加试卷
-          "/Home/Placement", //布置考试
-          "/Home/Markingexam", //批阅试卷
-          "/Home/examination", //试卷维护
-          "/Home/Achievements", //查看成绩
-          "/Home/Change", //修改密码
-          "/Home/Management", //班级管理
-          "/Home/student", //学生管理
-          "/Home/Teacher" //老师管理
-        ];
-        var arr1 = [
-          "首页",
-          "添加试卷",
-          "布置考试",
-          "批阅试卷",
-          "试卷维护",
-          "查看成绩",
-          "修改密码",
-          "班级管理",
-          "学生管理",
-          "老师管理"
-        ];
-        var name = targetName; //名字
-        console.log(name.label);
-
-        var index = arr1.indexOf(name.label); //查找名字
-        that.$router.push({ //跳转路由
-          path: arr[index] //路由名字
-        })
-      },
-      // 删除
-      removeTab(targetName) {
-        var than = this;
-        let tabs = this.editableTabs2;
-        let activeName = this.editableTabsValue2;
-        if (activeName === targetName) {
-          tabs.forEach((tab, index) => {
-            if (tab.name === targetName) {
-              let nextTab = tabs[index + 1] || tabs[index - 1];
-              if (nextTab) {
-                activeName = nextTab.name;
-                console.log(nextTab);
-                than.$router.push({
-                  path: nextTab.content
-                });
-              } 
-            }
-          });
-        }
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
-      },
-      // 点击
-      tabadd(path) {
-        var ev = ev || event
-        var index = this.findindex(ev.target.innerHtml) //查找元素是否存在
-        if (index < 0) { //如果大于0
-          var conte = document.getElementsByClassName("el-header")
-          var content = document.getElementsByClassName("el-tabs__item")
-          var wid = 0
-          for (var i = 0; i < content.length; i++) {
-            wid += content[i].offsetWidth
-          }
-          if (wid > conte[0].offsetWidth - 200) { //根据长度不够可以在加
-          }
-        }
-      },
-      findindex(name) { //查找元素是否已经存在
-        var index = 0;
-        for (var i = 0; i < this.editableTabs2.length; i++) {
-          if (this.editableTabs2[i].title == name) {
-            index = i;
-            break;
+      findindex(name) { //查找元素是否已存在
+        var index = 0
+        //循环下标是否已经存在 不在则返回-1
+        for (var i = 0; i < this.editableTabs.length; i++) {
+          if (this.editableTabs[i].title == name) {
+            index = i
+            break
           } else {
             index = -1
           }
         }
         return index
+      },
+      // 删除
+      removeTab(tab) {
+        var that = this;
+        var index = that.removeindex(tab)
+        if (index == -1) return //判断没有就返回
+        if (that.editableTabs[index].name != that.editableTabsValue2) { //判断如果删除tab在显示tab的左侧则只删除不跳转路由
+          that.editableTabs.splice(index, 1)
+        } else { //判断如果删除tab在显示tab的右侧则既删除跳转路由
+          that.editableTabs.splice(index, 1)
+          that.$router.push(that.editableTabs[index - 1].path) //标签页删除当前。减1 然后跳转当前路由
+          that.editableTabsValue2 = that.editableTabs[index - 1].name
+        }
+        var arr = [] //声明一个数组
+        arr = eval("(" + sessionStorage.getItem('arr') + ")") //会话存储里面查找arr
+        arr.splice(index, 1) //删除
+        sessionStorage.clear() //清空
+        var str = "["
+        for (var i = 0; i < arr.length; i++) {
+          for (var i = 0; i < that.editableTabs.length; i++) {
+            str += "{title:'" + that.editableTabs[i].title + "',path:'" + that.editableTabs[i].path + "',name:'" + that
+              .editableTabs[i].name + "'},"
+          }
+          str = str.substring(0, str.lastIndexOf(","))
+          str += "]"
+        }
+        sessionStorage.arr = str
+        sessionStorage.path = that.editableTabs[index - 1].path
+        sessionStorage.nvalue = that.editableTabsValue2
+      },
+      removeindex(tname) { //查找下标
+        // 删除这里也查找下标看是否存在 不在则返回-1
+        var that = this;
+        var index = 0
+        for (var i = 0; i < that.editableTabs.length; i++) {
+          if (that.editableTabs[i].name == tname) {
+            index = i
+            break
+          } else {
+            index = -1
+          }
+        }
+        return index
+      }
+
+    },
+    watch: {
+      editableTabsValue2: { //监听元素变化
+        deep: false,
+        handler(n, old) {
+          var index = this.removeindex(n)
+          var path = this.editableTabs[index].path //获取新路由
+          this.$router.push(path) //跳转到新路由
+          sessionStorage.path = path
+          sessionStorage.nvalue = this.editableTabs[index].name
+        }
+      }
+    },
+    mounted() {
+      this.windowwid();
+      var uid = sessionStorage.getItem("uid")
+      console.log(uid)
+      if (sessionStorage.arr != undefined) {
+        this.editableTabs = eval("(" + sessionStorage.getItem('arr') + ")")
+        this.$router.push(sessionStorage.getItem("path"));
+        this.editableTabsValue2 = sessionStorage.getItem("nvalue")
       }
     }
   }
@@ -414,7 +338,9 @@
     outline: 1;
     background-color: #99c8f5;
   }
-  .el-tabs--card>.el-tabs__header{
+
+  .el-tabs--card>.el-tabs__header {
     border-right: 1px solid #E4E7ED !important;
   }
+
 </style>
