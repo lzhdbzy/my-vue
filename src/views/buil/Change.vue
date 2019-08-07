@@ -84,8 +84,8 @@
         console.log(than.ruleForm.oldPass);
         console.log(than.ruleForm.pass)
         than.axios({
-          url: "/api/User/ModifyPassword?uid=" + than.ruleForm.uid + "&oldPassword=" + than.ruleForm.oldPass +
-            "&newPassword=" + than.ruleForm.pass,
+          url: "/api/User/ModifyPassword?uid=" + this.ruleForm.uid + "&oldPassword=" + this.ruleForm.oldPass +
+            "&newPassword=" + this.ruleForm.pass,
         }).then((res) => {
           if (res.data.code == 1) {     //1表示成功
             than.$message({
