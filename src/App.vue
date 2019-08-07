@@ -20,4 +20,11 @@ body{
     font-size: 12px;
     color: #909399;
 }
+.el-tabs--card>.el-tabs__header {
+    border-bottom: 1px solid #E4E7ED;
+    border-right: 1px solid #E4E7ED;
+}
+el-submenu__title:focus{
+  background-color: white;
+}
 </style>

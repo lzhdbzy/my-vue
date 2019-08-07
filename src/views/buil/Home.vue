@@ -24,7 +24,7 @@
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-menu"></i>
-              <span slot="title" style="font-family: 楷体;font-size: 17px">基础数据</span>
+              <span slot="title" style="font-family: 楷体;font-size: 17px;">基础数据</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="/Home/Change">修改密码</el-menu-item>
@@ -42,12 +42,12 @@
             <i class="el-icon-arrow-left" style="margin-top: 14px;" @click="trsfor"></i>
           </div>
           <div class="iconn">
-            <i class="el-icon-user"></i>
-          </div>
-          <div class="stop">
-            <span @click="stop">退出系统</span>
-          </div>
-          <div class="titlethere">
+              <i class="el-icon-user"></i>
+            </div>
+            <div class="stop">
+                <span @click="stop">退出系统</span>
+              </div>
+          <div class="titlethere">  
             <div class="titsb">
               <el-tabs v-model="editableTabsValue2" type="card" @tab-remove="removeTab">
                 <el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title"
@@ -65,7 +65,6 @@
     </el-container>
   </div>
 </template>
-
 <script>
   export default {
     // 数据
@@ -301,14 +300,12 @@
 
   .iconn {
     color: black !important;
-    margin-right: 130px;
     font-size: 27px;
     float: right;
   }
 
   .stop {
     color: black !important;
-    margin-right: 30px;
     font-size: 23px;
     float: right;
     font-family: 宋体;
@@ -342,5 +339,15 @@
   .el-tabs--card>.el-tabs__header {
     border-right: 1px solid #E4E7ED !important;
   }
-
+/* 背景 */
+  .is-active{
+    background-color: #99C8F5;
+  }
+  .el-submenu__title{
+    background-color: white;
+  }
+  .el-submenu__title:focus, .el-submenu__title:hover {
+    outline: 0;
+    background-color: #ecf5ff !important;
+}
 </style>

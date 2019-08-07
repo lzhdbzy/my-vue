@@ -1,9 +1,9 @@
 <template>
   <div id="Userpassw">
-    
+
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="300px" class="demo-ruleForm">
-        <i class="el-icon-edit">修改密码</i>
-      <el-form-item label="旧密码" prop="oldPass" style="margin-top: 40px;">   
+      <i class="el-icon-edit">修改密码</i>
+      <el-form-item label="旧密码" prop="oldPass" style="margin-top: 40px;">
         <el-input type="text" v-model="ruleForm.oldPass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="pass">
@@ -74,7 +74,15 @@
     },
     // 方法
     methods: {
-      Useradd() {
+      Useradd(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            // alert('submit!');
+          } else {
+            // console.log('error submit!!');
+            return false;
+          }
+        });
         let than = this;
         // sessionStorage.getItem 获取指定会话存储key
         var toke = sessionStorage.getItem("token_type")
@@ -87,25 +95,25 @@
           url: "/api/User/ModifyPassword?uid=" + this.ruleForm.uid + "&oldPassword=" + this.ruleForm.oldPass +
             "&newPassword=" + this.ruleForm.pass,
         }).then((res) => {
-          if (res.data.code == 1) {     //1表示成功
+          if (res.data.code == 1) { //1表示成功
             than.$message({
               message: res.data.message,
               type: 'success'
             })
             than.$router.push("/")
-            sessionStorage.clear()  
-          } else if (res.data.code == 0) {      //0表示数据没有任何变化
+            sessionStorage.clear()
+          } else if (res.data.code == 0) { //0表示数据没有任何变化
             than.$message({
               message: res.data.message,
               type: 'warning'
             })
-          } else if (res.data.code == -1) {   //系统异常
+          } else if (res.data.code == -1) { //系统异常
             than.$message({
               message: res.data.message,
               type: 'error'
             })
-          } else {
-            than.$message({           //其他错误
+          }else{
+            than.$message({
               message: res.data.message,
               type: 'error'
             })
@@ -118,31 +126,36 @@
     },
     // 加载后
     created() {
-      this.ruleForm.uid = sessionStorage.getItem("uid");      //用户唯一标识符
+      this.ruleForm.uid = sessionStorage.getItem("uid"); //用户唯一标识符
     },
   }
 
 </script>
 
 <style scoped lang="less">
-.el-icon-edit{
-  vertical-align: middle;
-  font-size: 23px;
-  text-align: center;
-}
-.el-form demo-ruleForm{
-  float: left !important;
-}
-#Userpassw{
-  vertical-align: middle;
-  text-align: center;
-  float: left;
-}
-.el-input__inner{
-  width: 383px !important;
-}
-.el-input{
-  width: 378px !important;
+  .el-icon-edit {
+    vertical-align: middle;
+    font-size: 23px;
+    text-align: center;
+  }
 
-}
+  .el-form demo-ruleForm {
+    float: left !important;
+  }
+
+  #Userpassw {
+    vertical-align: middle;
+    text-align: center;
+    float: left;
+  }
+
+  .el-input__inner {
+    width: 383px !important;
+  }
+
+  .el-input {
+    width: 378px !important;
+
+  }
+
 </style>

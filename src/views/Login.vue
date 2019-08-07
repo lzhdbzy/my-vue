@@ -140,6 +140,7 @@
 <style scoped lang="less">
   .picmain {
     background: url(../assets/背景.jpg);
+    overflow: hidden !important;
   }
 
   html {
@@ -150,6 +151,7 @@
   }
 
   .login {
+    overflow: hidden !important;
     position: absolute;
     top: 50%;
     left: 50%;
