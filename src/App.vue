@@ -27,4 +27,7 @@ body{
 el-submenu__title:focus{
   background-color: white;
 }
+.el-submenu__title{
+    background-color: white !important;
+  }
 </style>

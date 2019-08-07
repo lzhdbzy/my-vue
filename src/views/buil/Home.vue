@@ -19,7 +19,7 @@
               <el-menu-item index="/Home/examination">试卷维护 </el-menu-item>
               <el-menu-item index="/Home/Achievements">查看成绩 </el-menu-item>
             </el-menu-item-group>
-            <el-menu-item index="/Home" style="display:none">查看成绩 </el-menu-item>
+            <el-menu-item index="/Home" style="display:none">首页 </el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -344,10 +344,9 @@
     background-color: #99C8F5;
   }
   .el-submenu__title{
-    background-color: white;
+    background-color: white !important;
   }
-  .el-submenu__title:focus, .el-submenu__title:hover {
-    outline: 0;
+  .el-submenu__title:hover {
     background-color: #ecf5ff !important;
 }
 </style>
