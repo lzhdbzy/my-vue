@@ -1,6 +1,5 @@
 <template>
   <div id="Userpassw">
-
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="300px" class="demo-ruleForm">
       <i class="el-icon-edit">修改密码</i>
       <el-form-item label="旧密码" prop="oldPass" style="margin-top: 40px;">
@@ -13,7 +12,7 @@
         <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="Useradd('ruleForm')">提交</el-button>
+        <el-button type="primary" @click="userAdd('ruleForm')">提交</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -74,7 +73,7 @@
     },
     // 方法
     methods: {
-      Useradd(formName) {
+      userAdd(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // alert('submit!');
@@ -86,14 +85,17 @@
         let than = this;
         // sessionStorage.getItem 获取指定会话存储key
         var toke = sessionStorage.getItem("token_type")
+        than.axios.defaults.headers.Authorization = toke;
         console.log(toke)
-        // 默认配置请求头
-        this.axios.defaults.headers.Authorization = toke;
         console.log(than.ruleForm.oldPass);
         console.log(than.ruleForm.pass)
         than.axios({
-          url: "/api/User/ModifyPassword?uid=" + this.ruleForm.uid + "&oldPassword=" + this.ruleForm.oldPass +
-            "&newPassword=" + this.ruleForm.pass,
+          url: "/api/User/ModifyPassword",
+          params: {
+            uid: this.ruleForm.uid,
+            oldPassword: this.ruleForm.oldPass,
+            newPassword: this.ruleForm.pass
+          }
         }).then((res) => {
           if (res.data.code == 1) { //1表示成功
             than.$message({
@@ -112,7 +114,7 @@
               message: res.data.message,
               type: 'error'
             })
-          }else{
+          } else {
             than.$message({
               message: res.data.message,
               type: 'error'

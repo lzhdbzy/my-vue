@@ -3,7 +3,7 @@
     <el-container>
       <!-- 左边栏 -->
       <el-aside width="auto">
-        <el-menu class="el-menu-vertical-demo" active-text-color="#ffd04b" :collapse="isCollapse" @select="tabadd"
+        <el-menu class="el-menu-vertical-demo" active-text-color="#ffd04b" :collapse="isCollapse" @select="addTags"
           :default-active="$route.path" style="height: 1200px;
          overflow: hidden;">
           <div class="pi"><img src="../../assets/logo-1.png"></div>
@@ -31,6 +31,7 @@
               <el-menu-item index="/Home/Management">班级管理</el-menu-item>
               <el-menu-item index="/Home/student">学生管理</el-menu-item>
               <el-menu-item index="/Home/Teacher">老师管理</el-menu-item>
+              <el-menu-item index="/Home/Rolebased">角色管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -39,7 +40,7 @@
         <!-- 头部 -->
         <el-header style="padding: 0px;">
           <div class="top-left">
-            <i class="el-icon-arrow-left" style="margin-top: 14px;" @click="trsfor"></i>
+            <i class="el-icon-arrow-left" style="margin-top: 14px;" @click="imageScale"></i>
           </div>
           <div class="iconn">
               <i class="el-icon-user"></i>
@@ -81,14 +82,18 @@
     },
     // 方法
     methods: {
-      //窗体的高度
+      /*
+      窗体的高度
+      */ 
       windowwid() {
         var h = window.innerHeight
         var main = document.getElementById("main")
         main.style.cssText = "height:" + h + "px;"
       },
-      // 点击
-      tabadd(path) {
+      /*
+      点击添加标签
+      */
+      addTags(path) {
         var ev = ev || event
         var index = this.findindex(ev.target.innerHTML) //查找元素是否已经存在
         if (index < 0) { //大于0则添加进去
@@ -128,17 +133,21 @@
           this.editableTabsValue2 = this.editableTabs[index].name //标签页的下标名字
         }
       },
-      // 退出登录
+      /*
+        退出登录
+      */
       stop() {
         this.$message({
           message: '你已退出系统',
           type: 'success'
-        })
-        this.$router.push('/')
+        })      
         sessionStorage.clear()
+        this.$router.push('/')
       },
-      // 图片伸缩
-      trsfor() {
+      /*
+        图片伸缩  imageScale  
+      */
+      imageScale() {
         var that = this;
         that.isCollapse = !that.isCollapse
         var iconer = document.getElementsByClassName("el-icon-arrow-left")
@@ -148,7 +157,10 @@
           iconer[0].classList.remove("trsfor") //否则在元素中删除类名
         }
       },
-      findindex(name) { //查找元素是否已存在
+      /*
+        查找元素是否已存在
+      */ 
+      findindex(name) { 
         var index = 0
         //循环下标是否已经存在 不在则返回-1
         for (var i = 0; i < this.editableTabs.length; i++) {
@@ -161,7 +173,9 @@
         }
         return index
       },
-      // 删除
+      /*
+        删除标签页
+      */
       removeTab(tab) {
         var that = this;
         var index = that.removeindex(tab)
@@ -190,7 +204,10 @@
         sessionStorage.path = that.editableTabs[index - 1].path
         sessionStorage.nvalue = that.editableTabsValue2
       },
-      removeindex(tname) { //查找下标
+      /*
+        查找下标
+      */
+      removeindex(tname) { 
         // 删除这里也查找下标看是否存在 不在则返回-1
         var that = this;
         var index = 0
@@ -218,6 +235,9 @@
         }
       }
     },
+    /*
+      挂载后
+    */
     mounted() {
       this.windowwid();
       var uid = sessionStorage.getItem("uid")

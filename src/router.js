@@ -6,11 +6,13 @@ import Management from './views/buil/Management.vue'
 import student from './views/buil/student.vue'
 import Teacher from './views/buil/Teacher.vue'
 import Home from './views/buil/Home.vue'
+import Rolebased from './views/buil/Rolebased.vue'
 import Testpaper from './views/Teacherr/Testpaper.vue'
 import Placement from './views/Teacherr/Placement.vue'
 import Markingexam from './views/Teacherr/Markingexam.vue'
 import examination from './views/Teacherr/examination.vue'
 import Achievements from './views/Teacherr/Achievements.vue'
+
 
 Vue.use(Router)
 
@@ -39,6 +41,11 @@ export default new Router({
           path: 'student',      //学生管理
           name: 'student',
           component: student
+        },
+        {
+          path: 'Rolebased',      //学生管理
+          name: 'Rolebased',
+          component: Rolebased
         },
         {
           path: 'Teacher',        //老师管理

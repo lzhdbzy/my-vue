@@ -54,17 +54,21 @@
         let that = this
         that.isDisable = true
         that.axios({
-          url: "/api/OAuth/authenticate?userMobile=" + this.ruleForm.phone + "&userPassword=" + this.ruleForm.pass,
+          url: "/api/OAuth/authenticate",
+          params: {
+            userMobile: this.ruleForm.phone,
+            userPassword: this.ruleForm.pass
+          }
         }).then((res) => {
           that.$message({
             message: '登录成功',
             type: 'success'
           })
-          that.$router.push("/Home")
           // token 请求头
-          sessionStorage.setItem("userName", res.data.profile.userName);      //管理员
-          sessionStorage.setItem("uid", res.data.profile.userUid);    //用户唯一标识符
-          sessionStorage.setItem("token_type","Bearer" + " " + res.data.access_token);    //密钥
+          sessionStorage.setItem("userName", res.data.profile.userName); //管理员
+          sessionStorage.setItem("uid", res.data.profile.userUid); //用户唯一标识符
+          sessionStorage.setItem("token_type", "Bearer" + " " + res.data.access_token); //密钥
+          that.$router.push("/Home")
           console.log(res.data)
         }).catch((res) => {
           that.$message({
@@ -126,7 +130,7 @@
       }
     },
     created() {
-      sessionStorage.setItem("istrue",false);
+      sessionStorage.setItem("istrue", false);
       console.log(sessionStorage.getItem("istrue"));
     },
     mounted() { //挂载后
